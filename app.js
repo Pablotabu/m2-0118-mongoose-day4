@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 
 const {dbURL} = require('./config');
 const product = require('./routes/product');
+const reviews = require('./routes/reviews');
 
 // Nos conectamos a la bbdd para usarla durante la app de express
 const mongoose = require('mongoose');
@@ -29,6 +30,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', product);
+app.use('/', reviews);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

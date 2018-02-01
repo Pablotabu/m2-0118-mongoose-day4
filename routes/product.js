@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Product = require('../models/Product');
+const Review = require('../models/Review');
 
 /* CRUD -> READ ALL */
 router.get('/', (req, res, next) => {
@@ -17,7 +18,10 @@ router.get('/detail/:id', (req,res) => {
 
   Product.findById(productId, (err, product) => {
     if (err) { return next(err); }
-    res.render('products/detail', { product: product });
+    Review.find({product:productId}, (err,reviews) =>{
+      let num_stars = reviews.reduce((acc,e) => acc+e.stars,0);
+      res.render('products/detail', { product: product, stars:num_stars });
+    })
   });
 })
 
@@ -61,6 +65,8 @@ router.post('/new', (req, res) => {
 });
 
 
+/* CRUD -> DELETE PRODUCT FROM DATABASE */
+
 router.get('/delete/:id', (req, res) => {
   const id = req.params.id;
 
@@ -69,8 +75,6 @@ router.get('/delete/:id', (req, res) => {
     return res.redirect('/');
   });
 });
-
-
 
 
 module.exports = router;

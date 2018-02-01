@@ -2,4 +2,20 @@
 <img src="<%= product.imageUrl %>" width="200">
 <h3>Price: <span>$<%= product.price %></span></h3>
 <p><%= product.description %></p>
+<h1> THIS PRODUCT HAS <%= stars %>  STARS</h1>
+
+<% for(let i = 0; i<=5; i++) {%>
+        <a href="/add-star/<%= product._id %>/<%= i %>">
+            <% for(let j = 0; j<i; j++) {%>
+                <img src="http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/star-icon.png" alt="" width=30/>
+            <% } %>
+        </a>
+        </br>
+<% } %>
+
+</br>
+</br>
+</br>
+</br>
+
 <a href="/">GO HOME</a>
